@@ -3,6 +3,7 @@ using QuizNumbersLetters.Cards.Progress.Interfaces;
 using QuizNumbersLetters.Cards.Spawn;
 using QuizNumbersLetters.Cards.Spawn.Interfaces;
 using QuizNumbersLetters.Grid;
+using QuizNumbersLetters.Grid.Interfaces;
 using QuizNumbersLetters.Particles;
 using QuizNumbersLetters.Particles.Interfaces;
 using QuizNumbersLetters.UI;

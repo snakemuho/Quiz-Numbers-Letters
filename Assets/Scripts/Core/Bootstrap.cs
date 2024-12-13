@@ -2,6 +2,7 @@
 using QuizNumbersLetters.Cards.Spawn;
 using QuizNumbersLetters.Grid;
 using QuizNumbersLetters.Grid.Data;
+using QuizNumbersLetters.Grid.Interfaces;
 using QuizNumbersLetters.UI;
 using UnityEngine;
 using VContainer;

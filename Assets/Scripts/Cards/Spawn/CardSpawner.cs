@@ -4,6 +4,7 @@ using QuizNumbersLetters.Cards.Data;
 using QuizNumbersLetters.Cards.Progress.Interfaces;
 using QuizNumbersLetters.Cards.Spawn.Interfaces;
 using QuizNumbersLetters.Grid;
+using QuizNumbersLetters.Grid.Interfaces;
 using UnityEngine;
 using VContainer;
 using Random = UnityEngine.Random;

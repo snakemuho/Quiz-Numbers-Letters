@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace QuizNumbersLetters.Grid
+namespace QuizNumbersLetters.Grid.Interfaces
 {
     public interface IGridGenerator
     {
