@@ -46,6 +46,7 @@ namespace QuizNumbersLetters.Cards.Spawn
             SpawnCards(cardBundle, gridPositions);
 
             _correctAnswerAssigner.AssignCorrectAnswer(_spawnedCards, SpawnNewCards);
+            
             _levelProgressTracker.IncreaseIndex();
         }
 
@@ -59,29 +60,11 @@ namespace QuizNumbersLetters.Cards.Spawn
 
         private void SpawnCards(CardBundleData cardBundle, List<Vector2> gridPositions)
         {
-            var (unusedIndexes, usedIndexes) = _usedCardsTracker.GetPrioritizedCardIndexes(cardBundle.CardData);
-
+            _usedCardsTracker.SetPrioritizedCardIndexes(cardBundle.CardData);
+            
             foreach (var position in gridPositions)
             {
-                int cardIndex;
-
-                if (unusedIndexes.Count > 0)
-                {
-                    int randomIndex = Random.Range(0, unusedIndexes.Count);
-                    cardIndex = unusedIndexes[randomIndex];
-                    unusedIndexes.RemoveAt(randomIndex);
-                }
-                else if (usedIndexes.Count > 0)
-                {
-                    int randomIndex = Random.Range(0, usedIndexes.Count);
-                    cardIndex = usedIndexes[randomIndex];
-                    usedIndexes.RemoveAt(randomIndex);
-                }
-                else
-                {
-                    Debug.LogError("Not enough cards to fill the grid!");
-                    break;
-                }
+                int cardIndex = _usedCardsTracker.GetPrioritizedCardIndex();
 
                 var cardData = cardBundle.CardData[cardIndex];
                 var card = _cardFactory.CreateCard(cardData, position);

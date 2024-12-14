@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using QuizNumbersLetters.Cards.Data;
 using QuizNumbersLetters.Cards.Progress.Interfaces;
+using UnityEngine;
 
 namespace QuizNumbersLetters.Cards.Progress
 {
@@ -20,7 +21,7 @@ namespace QuizNumbersLetters.Cards.Progress
             _usedCards.Add(identifier);
         }
 
-        public (List<int> unusedIndexes, List<int> usedIndexes) GetPrioritizedCardIndexes(CardData[] cardDataPool)
+        public void SetPrioritizedCardIndexes(CardData[] cardDataPool)
         {
             _usedIndexes.Clear();
             _unusedIndexes.Clear();
@@ -32,13 +33,36 @@ namespace QuizNumbersLetters.Cards.Progress
                 else
                     _unusedIndexes.Add(i);
             }
+        }
 
-            return (_unusedIndexes, _usedIndexes);
+        public int GetPrioritizedCardIndex()
+        {
+            if (_unusedIndexes.Count > 0)
+            {
+                return GetRandomIndex(_unusedIndexes);
+            }
+            else if (_usedIndexes.Count > 0)
+            {
+                return GetRandomIndex(_usedIndexes);
+            }
+            else
+            {
+                Debug.LogError("Not enough cards to fill the grid.");
+                return 0;
+            }
         }
 
         public void ResetUsedCards()
         {
             _usedCards.Clear();
+        }
+
+        private int GetRandomIndex(List<int> list)
+        {
+            int randomIndex = Random.Range(0, list.Count);
+            int cardIndex = list[randomIndex];
+            list.RemoveAt(randomIndex);
+            return cardIndex;
         }
     }
 }

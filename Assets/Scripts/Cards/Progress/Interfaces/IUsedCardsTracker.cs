@@ -8,6 +8,7 @@ namespace QuizNumbersLetters.Cards.Progress.Interfaces
         bool WasCardUsed(string identifier);
         void MarkCardAsUsed(string cardDataIdentifier);
         void ResetUsedCards();
-        (List<int> unusedIndexes, List<int> usedIndexes) GetPrioritizedCardIndexes(CardData[] cardDataPool);
+        void SetPrioritizedCardIndexes(CardData[] cardDataPool);
+        int GetPrioritizedCardIndex();
     }
 }
