@@ -1,18 +1,18 @@
-﻿using QuizNumbersLetters.Cards.Progress.Interfaces;
-using QuizNumbersLetters.Grid.Data;
+﻿using QuizNumbersLetters.Grid.Data;
+using QuizNumbersLetters.Progress.Interfaces;
 
-namespace QuizNumbersLetters.Cards.Progress
+namespace QuizNumbersLetters.Progress
 {
     public class LevelProgressTracker : ILevelProgressTracker
     {
-        private readonly ILevelRestart _levelRestart;
+        private readonly IGameRestartHandler _gameRestartHandler;
         
         private GridDifficultyData[] _gridDifficultyDatas;
         private int _currentGridDifficultyIndex;
 
-        public LevelProgressTracker(ILevelRestart levelRestart)
+        public LevelProgressTracker(IGameRestartHandler gameRestartHandler)
         {
-            _levelRestart = levelRestart;
+            _gameRestartHandler = gameRestartHandler;
         }
 
         public void SetGridDifficulties(GridDifficultyData[] gridDifficultyDatas)
@@ -25,7 +25,7 @@ namespace QuizNumbersLetters.Cards.Progress
             if (_currentGridDifficultyIndex >= _gridDifficultyDatas.Length)
             {
                 ResetIndex();
-                _levelRestart.ShowRestartPanel();
+                _gameRestartHandler.ShowRestartPanel();
                 return null;
             }
             return _gridDifficultyDatas[_currentGridDifficultyIndex];

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using QuizNumbersLetters.Cards.Data;
-using QuizNumbersLetters.Cards.Progress.Interfaces;
+using QuizNumbersLetters.Progress.Interfaces;
 using UnityEngine;
 
-namespace QuizNumbersLetters.Cards.Progress
+namespace QuizNumbersLetters.Progress
 {
     public class UsedCardsTracker : IUsedCardsTracker
     {

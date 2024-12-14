@@ -1,6 +1,6 @@
 ﻿using QuizNumbersLetters.Grid.Data;
 
-namespace QuizNumbersLetters.Cards.Progress.Interfaces
+namespace QuizNumbersLetters.Progress.Interfaces
 {
     public interface ILevelProgressTracker
     {

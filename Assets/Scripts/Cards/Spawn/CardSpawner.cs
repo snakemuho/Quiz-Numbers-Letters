@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using QuizNumbersLetters.Cards.Data;
-using QuizNumbersLetters.Cards.Progress.Interfaces;
 using QuizNumbersLetters.Cards.Spawn.Interfaces;
 using QuizNumbersLetters.Grid.Interfaces;
+using QuizNumbersLetters.Progress.Interfaces;
 using UnityEngine;
 using VContainer;
 using Random = UnityEngine.Random;

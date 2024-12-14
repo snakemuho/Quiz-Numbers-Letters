@@ -1,11 +1,11 @@
-using QuizNumbersLetters.Cards.Progress;
-using QuizNumbersLetters.Cards.Progress.Interfaces;
 using QuizNumbersLetters.Cards.Spawn;
 using QuizNumbersLetters.Cards.Spawn.Interfaces;
 using QuizNumbersLetters.Grid;
 using QuizNumbersLetters.Grid.Interfaces;
 using QuizNumbersLetters.Particles;
 using QuizNumbersLetters.Particles.Interfaces;
+using QuizNumbersLetters.Progress;
+using QuizNumbersLetters.Progress.Interfaces;
 using QuizNumbersLetters.UI;
 using UnityEngine;
 using VContainer;
@@ -22,7 +22,7 @@ namespace QuizNumbersLetters.Core
         {
             builder.Register<IGridGenerator, GridGenerator>(Lifetime.Singleton);
             builder.Register<ILevelProgressTracker, LevelProgressTracker>(Lifetime.Singleton);
-            builder.Register<ILevelRestart, LevelRestart>(Lifetime.Singleton);
+            builder.Register<IGameRestartHandler, GameRestartHandler>(Lifetime.Singleton);
             builder.Register<IUsedCardsTracker, UsedCardsTracker>(Lifetime.Singleton);
             builder.Register<ICorrectAnswerAssigner, CorrectAnswerAssigner>(Lifetime.Singleton);
             builder.Register<IParticleFactory, ParticleFactory>(Lifetime.Singleton)

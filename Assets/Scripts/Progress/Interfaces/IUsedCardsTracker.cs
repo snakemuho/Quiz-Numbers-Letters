@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using QuizNumbersLetters.Cards.Data;
 
-namespace QuizNumbersLetters.Cards.Progress.Interfaces
+namespace QuizNumbersLetters.Progress.Interfaces
 {
     public interface IUsedCardsTracker
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using DG.Tweening;
-using QuizNumbersLetters.Cards.Progress.Interfaces;
+using QuizNumbersLetters.Progress.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -12,7 +12,7 @@ namespace QuizNumbersLetters.UI
         [SerializeField] private Image BlackPanel;
         [SerializeField] private GameObject _restartPanel;
         
-        private ILevelRestart _levelRestart;
+        private IGameRestartHandler _gameRestartHandler;
 
         public void RestartGame()
         {
@@ -20,14 +20,14 @@ namespace QuizNumbersLetters.UI
             FadeToBlack(() =>
             {
                 DisableRestartPanel();
-                _levelRestart.RestartGame();
+                _gameRestartHandler.RestartGame();
             });
         }
 
         [Inject]
-        private void Construct(ILevelRestart levelRestart)
+        private void Construct(IGameRestartHandler gameRestartHandler)
         {
-            _levelRestart = levelRestart;
+            _gameRestartHandler = gameRestartHandler;
         }
 
         private void Start()

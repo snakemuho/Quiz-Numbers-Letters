@@ -1,8 +1,7 @@
-﻿using QuizNumbersLetters.Cards.Progress.Interfaces;
-using QuizNumbersLetters.Cards.Spawn;
-using QuizNumbersLetters.Grid;
+﻿using QuizNumbersLetters.Cards.Spawn;
 using QuizNumbersLetters.Grid.Data;
 using QuizNumbersLetters.Grid.Interfaces;
+using QuizNumbersLetters.Progress.Interfaces;
 using QuizNumbersLetters.UI;
 using UnityEngine;
 using VContainer;
@@ -20,15 +19,15 @@ namespace QuizNumbersLetters.Core
 
         private IGridGenerator _gridGenerator;
         private ILevelProgressTracker _levelProgressTracker;
-        private ILevelRestart _levelRestart;
+        private IGameRestartHandler _gameRestartHandler;
         private QuestionDisplay _questionDisplay;
         
         [Inject]
-        private void Construct(ILevelProgressTracker levelProgressTracker, ILevelRestart levelRestart,
+        private void Construct(ILevelProgressTracker levelProgressTracker, IGameRestartHandler gameRestartHandler,
             IGridGenerator gridGenerator, QuestionDisplay questionDisplay)
         {
             _levelProgressTracker = levelProgressTracker;
-            _levelRestart = levelRestart;
+            _gameRestartHandler = gameRestartHandler;
             _gridGenerator = gridGenerator;
             _questionDisplay = questionDisplay;
         }
@@ -37,9 +36,9 @@ namespace QuizNumbersLetters.Core
         {
             _levelProgressTracker.SetGridDifficulties(_gridDifficultyDatas);
             _gridGenerator.SetGridData(_gridBackground, _gridCellSize, _gridCellSpacing);
-            _levelRestart.SetRestartObjects(_restartPanel, _questionDisplay, _cardSpawner);
+            _gameRestartHandler.SetRestartObjects(_restartPanel, _questionDisplay, _cardSpawner);
 
-            _levelRestart.RestartGame();
+            _gameRestartHandler.RestartGame();
         }
     }
 }

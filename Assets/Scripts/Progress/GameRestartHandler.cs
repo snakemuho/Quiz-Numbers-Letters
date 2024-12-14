@@ -1,11 +1,11 @@
-﻿using QuizNumbersLetters.Cards.Progress.Interfaces;
-using QuizNumbersLetters.Cards.Spawn;
+﻿using QuizNumbersLetters.Cards.Spawn;
+using QuizNumbersLetters.Progress.Interfaces;
 using QuizNumbersLetters.UI;
 using UnityEngine;
 
-namespace QuizNumbersLetters.Cards.Progress
+namespace QuizNumbersLetters.Progress
 {
-    public class LevelRestart : ILevelRestart
+    public class GameRestartHandler : IGameRestartHandler
     {
         private GameObject _restartPanel;
         private QuestionDisplay _questionDisplay;

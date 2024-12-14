@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using QuizNumbersLetters.Cards.Progress.Interfaces;
 using QuizNumbersLetters.Cards.Spawn.Interfaces;
+using QuizNumbersLetters.Progress.Interfaces;
 using QuizNumbersLetters.UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
