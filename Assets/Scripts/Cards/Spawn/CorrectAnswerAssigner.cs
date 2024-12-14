@@ -28,7 +28,7 @@ namespace QuizNumbersLetters.Cards.Spawn
                 return;
             }
 
-            Card correctCard = null;
+            Card correctCard;
             _unusedCards.Clear();
 
             foreach (var card in spawnedCards)

@@ -44,7 +44,7 @@ namespace QuizNumbersLetters.Grid
             return _positions;
         }
 
-        public void ShuffleGridPositions(List<Vector2> gridPositions)
+        private void ShuffleGridPositions(List<Vector2> gridPositions)
         {
             for (int i = gridPositions.Count - 1; i > 0; i--)
             {
