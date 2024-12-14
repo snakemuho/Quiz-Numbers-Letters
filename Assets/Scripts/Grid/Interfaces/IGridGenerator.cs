@@ -6,6 +6,7 @@ namespace QuizNumbersLetters.Grid.Interfaces
     public interface IGridGenerator
     {
         void SetGridData(GameObject gridBackground, Vector2 cellSize, Vector2 cellSpacing);
-        IEnumerable<Vector2> GenerateGridPositions(int rows, int columns);
+        List<Vector2> GenerateGridPositions(int rows, int columns);
+        void ShuffleGridPositions(List<Vector2> gridPositions);
     }
 }

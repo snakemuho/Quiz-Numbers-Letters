@@ -7,6 +7,8 @@ namespace QuizNumbersLetters.Cards.Progress
     public class UsedCardsTracker : IUsedCardsTracker
     {
         private readonly HashSet<string> _usedCards = new HashSet<string>();
+        private readonly List<int> _usedIndexes = new List<int>();
+        private readonly List<int> _unusedIndexes = new List<int>();
 
         public bool WasCardUsed(string identifier)
         {
@@ -18,22 +20,25 @@ namespace QuizNumbersLetters.Cards.Progress
             _usedCards.Add(identifier);
         }
 
-        public IEnumerable<int> GetPrioritizedCardIndexes(CardData[] cardDataPool)
+        public (List<int> unusedIndexes, List<int> usedIndexes) GetPrioritizedCardIndexes(CardData[] cardDataPool)
         {
-            for (int i = 0; i < cardDataPool.Length; i++)
-            {
-                if (!WasCardUsed(cardDataPool[i].Identifier))
-                {
-                    yield return i;
-                }
-            }
+            _usedIndexes.Clear();
+            _unusedIndexes.Clear();
+
             for (int i = 0; i < cardDataPool.Length; i++)
             {
                 if (WasCardUsed(cardDataPool[i].Identifier))
-                {
-                    yield return i;
-                }
+                    _usedIndexes.Add(i);
+                else
+                    _unusedIndexes.Add(i);
             }
+
+            return (_unusedIndexes, _usedIndexes);
+        }
+
+        public void ResetUsedCards()
+        {
+            _usedCards.Clear();
         }
     }
 }

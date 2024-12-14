@@ -5,8 +5,9 @@ namespace QuizNumbersLetters.Cards.Progress.Interfaces
 {
     public interface IUsedCardsTracker
     {
-        public bool WasCardUsed(string identifier);
+        bool WasCardUsed(string identifier);
         void MarkCardAsUsed(string cardDataIdentifier);
-        public IEnumerable<int> GetPrioritizedCardIndexes(CardData[] cardDataPool);
+        void ResetUsedCards();
+        (List<int> unusedIndexes, List<int> usedIndexes) GetPrioritizedCardIndexes(CardData[] cardDataPool);
     }
 }

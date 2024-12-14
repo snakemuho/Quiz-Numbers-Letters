@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using QuizNumbersLetters.Cards.Data;
 using QuizNumbersLetters.Cards.Progress.Interfaces;
 using QuizNumbersLetters.Cards.Spawn.Interfaces;
-using QuizNumbersLetters.Grid;
 using QuizNumbersLetters.Grid.Interfaces;
 using UnityEngine;
 using VContainer;
@@ -59,6 +57,38 @@ namespace QuizNumbersLetters.Cards.Spawn
             }
         }
 
+        private void SpawnCards(CardBundleData cardBundle, List<Vector2> gridPositions)
+        {
+            var (unusedIndexes, usedIndexes) = _usedCardsTracker.GetPrioritizedCardIndexes(cardBundle.CardData);
+
+            foreach (var position in gridPositions)
+            {
+                int cardIndex;
+
+                if (unusedIndexes.Count > 0)
+                {
+                    int randomIndex = Random.Range(0, unusedIndexes.Count);
+                    cardIndex = unusedIndexes[randomIndex];
+                    unusedIndexes.RemoveAt(randomIndex);
+                }
+                else if (usedIndexes.Count > 0)
+                {
+                    int randomIndex = Random.Range(0, usedIndexes.Count);
+                    cardIndex = usedIndexes[randomIndex];
+                    usedIndexes.RemoveAt(randomIndex);
+                }
+                else
+                {
+                    Debug.LogError("Not enough cards to fill the grid!");
+                    break;
+                }
+
+                var cardData = cardBundle.CardData[cardIndex];
+                var card = _cardFactory.CreateCard(cardData, position);
+                _spawnedCards.Add(card);
+            }
+        }
+
         private void ClearExistingCards()
         {
             if (_spawnedCards.Count > 0)
@@ -71,25 +101,10 @@ namespace QuizNumbersLetters.Cards.Spawn
                 _spawnedCards.Clear();
             }
         }
-        
+
         private CardBundleData GetRandomCardBundle()
         {
             return _cardBundles[Random.Range(0, _cardBundles.Length)];
-        }
-        
-        private void SpawnCards(CardBundleData cardBundle, IEnumerable<Vector2> gridPositions)
-        {
-            var prioritizedIndexes = _usedCardsTracker.GetPrioritizedCardIndexes(cardBundle.CardData).ToList();
-
-            foreach (var position in gridPositions)
-            {
-                var cardIndex = prioritizedIndexes[Random.Range(0, prioritizedIndexes.Count)];
-                prioritizedIndexes.Remove(cardIndex);
-                
-                var cardData = cardBundle.CardData[cardIndex];
-                var card = _cardFactory.CreateCard(cardData, position);
-                _spawnedCards.Add(card);
-            }
         }
     }
 }

@@ -12,6 +12,7 @@ namespace QuizNumbersLetters.Cards.Spawn
     {
         private readonly QuestionDisplay _questionDisplay;
         private readonly IUsedCardsTracker _usedCardsTracker;
+        private readonly List<Card> _unusedCards = new List<Card>();
 
         public CorrectAnswerAssigner(QuestionDisplay questionDisplay, IUsedCardsTracker usedCardsTracker)
         {
@@ -28,20 +29,23 @@ namespace QuizNumbersLetters.Cards.Spawn
             }
 
             Card correctCard = null;
-            int unusedCount = 0;
-            
+            _unusedCards.Clear();
+
             foreach (var card in spawnedCards)
             {
                 if (!_usedCardsTracker.WasCardUsed(card.CardData.Identifier))
-                {
-                    if (Random.Range(0, ++unusedCount) == 0)
-                        correctCard = card;
-                }
+                    _unusedCards.Add(card);
             }
 
-            if (correctCard == null)
+            if (_unusedCards.Count > 0)
+            {
+                correctCard = _unusedCards[Random.Range(0, _unusedCards.Count)];
+            }
+            else
             {
                 correctCard = spawnedCards[Random.Range(0, spawnedCards.Count)];
+                
+                _usedCardsTracker.ResetUsedCards();
             }
 
             correctCard.MarkAsCorrectAnswer(correctAnswerAction);
